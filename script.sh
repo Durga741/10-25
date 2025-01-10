@@ -1,30 +1,30 @@
 #!/bin/bash
 
 # Capture parameters
-ID=$1
+CUST_ID=$1
 PREVIEW=$2
 
 # Check if parameters are provided
-if [ -z "$ID" ] || [ -z "$PREVIEW" ]; then
-    echo "Error: Both ID and PREVIEW are required."
-    echo "Usage: ./script.sh <ID> <PREVIEW>"
+if [ -z "$CUST_ID" ] || [ -z "$PREVIEW" ]; then
+    echo "Error: Both CUST_ID and PREVIEW are required."
+    echo "Usage: ./script.sh <CUST_ID> <PREVIEW>"
     exit 1
 fi
 
 # Print received parameters
-echo "ID: $ID"
+echo "CUST_ID: $CUST_ID"
 echo "Preview: $PREVIEW"
 
-# Example operation based on ID and Preview
+# Example operation based on CUST_ID and Preview
 if [ "$PREVIEW" == "true" ]; then
-    echo "Preview mode enabled for ID: $ID"
+    echo "Preview mode enabled for CUST_ID: $CUST_ID"
     # Simulated action for preview mode
-    echo "Previewing content for ID: $ID"
+    echo "Previewing content for ID: $CUST_ID"
 else
-    echo "Processing ID: $ID"
+    echo "Processing CUST_ID: $CUST_ID"
     # Simulated action for non-preview mode
-    echo "Executing full process for ID: $ID"
+    echo "Executing full process for CUST_ID: $CUST_ID"
 fi
 
 # Simulated completion message
-echo "Operation completed successfully for ID: $ID with Preview: $PREVIEW."
+echo "Operation completed successfully for CUST_ID: $CUST_ID with Preview: $PREVIEW."
