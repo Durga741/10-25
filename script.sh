@@ -1,30 +1,24 @@
 #!/bin/bash
+# Simple script to install Jenkins on Ubuntu
 
-# Capture parameters
-CUST_ID=$1
-PREVIEW=$2
+set -e  # Exit immediately if a command exits with a non-zero status
 
-# Check if parameters are provided
-if [ -z "$CUST_ID" ] || [ -z "$PREVIEW" ]; then
-    echo "Error: Both CUST_ID and PREVIEW are required."
-    echo "Usage: ./script.sh <CUST_ID> <PREVIEW>"
-    exit 1
-fi
+echo "=== Adding Jenkins repository key ==="
+sudo mkdir -p /etc/apt/keyrings
+sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian/jenkins.io-2023.key
 
-# Print received parameters
-echo "CUST_ID: $CUST_ID"
-echo "Preview: $PREVIEW"
+echo "=== Adding Jenkins repository ==="
+echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian binary/" | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
 
-# Example operation based on CUST_ID and Preview
-if [ "$PREVIEW" == "true" ]; then
-    echo "Preview mode enabled for CUST_ID: $CUST_ID"
-    # Simulated action for preview mode
-    echo "Previewing content for ID: $CUST_ID"
-else
-    echo "Processing CUST_ID: $CUST_ID"
-    # Simulated action for non-preview mode
-    echo "Executing full process for CUST_ID: $CUST_ID"
-fi
+echo "=== Updating package list ==="
+sudo apt-get update -y
 
-# Simulated completion message
-echo "Operation completed successfully for CUST_ID: $CUST_ID with Preview: $PREVIEW."
+echo "=== Installing Java (OpenJDK 17) ==="
+sudo apt-get install -y fontconfig openjdk-17-jre
+
+echo "=== Installing Jenkins ==="
+sudo apt-get install -y jenkins
+
+echo "=== Jenkins installation complete! ==="
+echo "You can start Jenkins with: sudo systemctl start jenkins"
+echo "Then check status using: sudo systemctl status jenkins"
